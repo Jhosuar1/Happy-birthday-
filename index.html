@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz cumpleaños, Angie Lorena</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#1b1330;
+    --bg-mid:#241a3d;
+    --bg-soft:#2e2250;
+    --gold:#e8b86d;
+    --gold-soft:#f0cf9a;
+    --blush:#e3a6a0;
+    --cream:#f6eedd;
+    --lavender:#a99bc4;
+    --line:rgba(232,184,109,0.25);
+    --shadow:rgba(10,6,20,0.45);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg-deep);
+    color:var(--cream);
+    font-family:'Quicksand', sans-serif;
+    font-weight:500;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  body.lock{overflow:hidden; height:100vh;}
+
+  h1,h2,h3,.display{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    margin:0;
+  }
+
+  a{color:var(--gold-soft);}
+
+  /* ---------- Starfield background ---------- */
+  .stars{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    overflow:hidden;
+  }
+  .stars span{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:var(--cream);
+    border-radius:50%;
+    opacity:0.35;
+    animation:twinkle 4s ease-in-out infinite;
+  }
+  @keyframes twinkle{
+    0%,100%{opacity:0.15; transform:scale(1);}
+    50%{opacity:0.9; transform:scale(1.6);}
+  }
+
+  /* ---------- Intro sequence ---------- */
+  #intro{
+    position:fixed;
+    inset:0;
+    z-index:50;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:radial-gradient(ellipse at 50% 30%, var(--bg-soft), var(--bg-deep) 70%);
+    cursor:pointer;
+    transition:opacity 1.1s ease;
+  }
+  #intro.fade-out{opacity:0; pointer-events:none;}
+  .intro-phrase{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:clamp(2rem, 7vw, 4.2rem);
+    color:var(--cream);
+    text-align:center;
+    padding:0 1.2rem;
+    opacity:0;
+    transform:translateY(14px) scale(0.97);
+    transition:opacity 0.9s ease, transform 0.9s ease;
+  }
+  .intro-phrase.show{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+  .intro-phrase .accent{color:var(--gold);}
+  .intro-hint{
+    position:absolute;
+    bottom:8%;
+    font-size:0.85rem;
+    color:var(--lavender);
+    letter-spacing:0.03em;
+    opacity:0.7;
+  }
+  .intro-dots{
+    position:absolute;
+    bottom:5%;
+    display:flex;
+    gap:8px;
+  }
+  .intro-dots span{
+    width:6px;height:6px;border-radius:50%;
+    background:var(--line);
+    transition:background 0.4s ease;
+  }
+  .intro-dots span.active{background:var(--gold);}
+
+  /* ---------- Layout ---------- */
+  main{
+    position:relative;
+    z-index:1;
+    max-width:760px;
+    margin:0 auto;
+    padding:0 1.5rem;
+  }
+  section{
+    padding:6.5rem 0;
+    border-bottom:1px solid var(--line);
+  }
+  section:last-of-type{border-bottom:none;}
+
+  .kicker{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    color:var(--blush);
+    font-size:1.15rem;
+    margin-bottom:0.6rem;
+    display:block;
+  }
+
+  /* ---------- Hero ---------- */
+  #hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    border-bottom:none;
+    padding-top:2rem;
+  }
+  .moon{
+    width:46px;height:46px;
+    border-radius:50%;
+    background:var(--gold-soft);
+    box-shadow:-12px 0 0 -6px var(--bg-deep), 0 0 40px 6px rgba(232,184,109,0.35);
+    margin-bottom:2.2rem;
+  }
+  #hero h1{
+    font-size:clamp(1.4rem, 4vw, 1.9rem);
+    font-style:italic;
+    color:var(--lavender);
+    font-weight:500;
+  }
+  #hero .name{
+    font-size:clamp(3rem, 10vw, 5.5rem);
+    color:var(--cream);
+    margin:0.3rem 0 1.4rem;
+    line-height:1.05;
+  }
+  #hero .name em{
+    color:var(--gold);
+    font-style:italic;
+  }
+  #hero p.sub{
+    max-width:38ch;
+    color:var(--lavender);
+    font-size:1.02rem;
+  }
+  .scroll-cue{
+    margin-top:3.5rem;
+    width:1px;
+    height:46px;
+    background:linear-gradient(var(--gold), transparent);
+    position:relative;
+  }
+
+  /* ---------- Carta / envelope ---------- */
+  #carta{text-align:center;}
+  .envelope-wrap{
+    display:flex;
+    justify-content:center;
+    margin:2.4rem 0;
+  }
+  .envelope{
+    position:relative;
+    width:min(320px, 80vw);
+    height:200px;
+    cursor:pointer;
+    background:none;
+    border:none;
+    padding:0;
+  }
+  .envelope .body{
+    position:absolute;
+    inset:0;
+    background:var(--bg-soft);
+    border:1px solid var(--line);
+    border-radius:6px;
+  }
+  .envelope .flap{
+    position:absolute;
+    top:0; left:0; right:0;
+    height:100px;
+    background:var(--bg-mid);
+    clip-path:polygon(0 0, 100% 0, 50% 78%);
+    border-bottom:1px solid var(--line);
+    transform-origin:top;
+    transition:transform 0.7s cubic-bezier(.6,.1,.3,1);
+    z-index:3;
+  }
+  .envelope.open .flap{
+    transform:rotateX(180deg);
+  }
+  .envelope .seal{
+    position:absolute;
+    top:52px; left:50%;
+    transform:translateX(-50%);
+    width:34px;height:34px;
+    border-radius:50%;
+    background:var(--gold);
+    z-index:4;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    color:var(--bg-deep);
+    transition:opacity 0.4s ease;
+  }
+  .envelope.open .seal{opacity:0;}
+  .envelope .letter-peek{
+    position:absolute;
+    left:8%; right:8%; bottom:0;
+    height:0;
+    background:var(--cream);
+    color:var(--bg-deep);
+    border-radius:4px 4px 0 0;
+    z-index:2;
+    overflow:hidden;
+    transition:height 0.7s ease 0.15s, bottom 0.7s ease 0.15s;
+  }
+  .envelope.open .letter-peek{
+    height:92%;
+    bottom:4%;
+  }
+  .envelope-hint{
+    display:block;
+    margin-top:0.9rem;
+    font-size:0.9rem;
+    color:var(--lavender);
+  }
+
+  .carta-texto{
+    max-width:56ch;
+    margin:2.6rem auto 0;
+    text-align:left;
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.32rem;
+    color:var(--cream);
+    opacity:0;
+    max-height:0;
+    overflow:hidden;
+    transition:opacity 0.9s ease 0.3s;
+  }
+  .carta-texto.visible{
+    opacity:1;
+    max-height:none;
+    overflow:visible;
+  }
+  .carta-texto p{margin:0 0 1.1rem;}
+  .carta-texto .firma{
+    font-style:italic;
+    color:var(--blush);
+    margin-top:1.6rem;
+  }
+
+  /* ---------- Valores ---------- */
+  #valores h2{font-size:clamp(1.8rem,4vw,2.4rem); margin-bottom:2.4rem;}
+  .valor{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:1.2rem;
+    padding:1.5rem 0;
+    border-top:1px solid var(--line);
+    align-items:baseline;
+  }
+  .valor:first-of-type{border-top:none;}
+  .valor .marca{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    color:var(--gold);
+    font-size:1.4rem;
+    white-space:nowrap;
+  }
+  .valor .txt strong{
+    display:block;
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:1.35rem;
+    color:var(--cream);
+    margin-bottom:0.25rem;
+  }
+  .valor .txt span{color:var(--lavender); font-size:0.98rem;}
+
+  /* ---------- Playlist / video shared frame ---------- */
+  .media-card{
+    background:var(--bg-mid);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:1.4rem;
+    box-shadow:0 20px 40px -20px var(--shadow);
+  }
+  .media-card h2{font-size:clamp(1.8rem,4vw,2.4rem); margin-bottom:0.4rem;}
+  .media-card p.desc{color:var(--lavender); margin:0 0 1.4rem; max-width:46ch;}
+  .media-frame{
+    border-radius:10px;
+    overflow:hidden;
+    border:1px solid var(--line);
+  }
+  .media-frame iframe{display:block; width:100%; border:none;}
+
+  /* ---------- Velas / deseos ---------- */
+  #velas{text-align:center;}
+  .velas-row{
+    display:flex;
+    justify-content:center;
+    gap:1.6rem;
+    margin:2.6rem 0 1rem;
+    flex-wrap:wrap;
+  }
+  .vela{
+    background:none;border:none;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;
+    width:44px;
+    padding:0;
+  }
+  .vela .flame{
+    width:14px;height:20px;
+    background:radial-gradient(circle at 50% 30%, #fff2c9, var(--gold) 60%, transparent 75%);
+    border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+    margin-bottom:-2px;
+    transition:opacity 0.35s ease, transform 0.35s ease;
+    animation:flicker 1.6s ease-in-out infinite;
+  }
+  .vela.off .flame{opacity:0; transform:scaleY(0.2);}
+  @keyframes flicker{
+    0%,100%{transform:scaleY(1) rotate(0deg);}
+    50%{transform:scaleY(1.08) rotate(-2deg);}
+  }
+  .vela .stick{
+    width:12px;height:52px;
+    background:linear-gradient(var(--blush), var(--bg-soft));
+    border-radius:2px;
+  }
+  .vela .base{
+    width:30px;height:8px;
+    background:var(--bg-mid);
+    border:1px solid var(--line);
+    border-radius:2px;
+    margin-top:-2px;
+  }
+  #deseo-final{
+    margin-top:2rem;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:1.5rem;
+    color:var(--gold-soft);
+    opacity:0;
+    transition:opacity 0.8s ease;
+  }
+  #deseo-final.show{opacity:1;}
+
+  footer{
+    text-align:center;
+    padding:3.5rem 0 4rem;
+    color:var(--lavender);
+    font-size:0.95rem;
+  }
+  footer .fname{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    color:var(--blush);
+    font-size:1.2rem;
+    display:block;
+    margin-top:0.4rem;
+  }
+
+  .particle{
+    position:fixed;
+    z-index:60;
+    pointer-events:none;
+    border-radius:50%;
+  }
+
+  @media (max-width:560px){
+    section{padding:4.2rem 0;}
+    .valor{grid-template-columns:1fr;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+</style>
+</head>
+<body class="lock">
+
+<div class="stars" id="stars"></div>
+
+<div id="intro">
+  <div class="intro-phrase show" id="intro-phrase">Hola</div>
+  <div class="intro-dots" id="intro-dots"></div>
+  <div class="intro-hint">toca para continuar</div>
+</div>
+
+<main>
+
+  <section id="hero">
+    <div class="moon"></div>
+    <h1>hoy el mundo se detiene un momento para celebrarte</h1>
+    <div class="name">Feliz cumpleaños,<br><em>Angie Lorena</em></div>
+    <p class="sub">Este rincón está hecho solo para ti, con todo lo que quiero decirte y no siempre alcanzo a decir a tiempo.</p>
+    <div class="scroll-cue"></div>
+  </section>
+
+  <section id="carta">
+    <span class="kicker">para ti</span>
+    <h2 class="display" style="font-size:clamp(1.9rem,4vw,2.5rem);">Una carta que quiero que leas despacio</h2>
+    <div class="envelope-wrap">
+      <button class="envelope" id="envelope" aria-label="Abrir la carta">
+        <div class="body"></div>
+        <div class="flap"></div>
+        <div class="seal">AL</div>
+        <div class="letter-peek"></div>
+      </button>
+    </div>
+    <span class="envelope-hint">toca el sobre para abrirlo</span>
+
+    <div class="carta-texto" id="carta-texto">
+      <p>Angie Lorena, feliz cumpleaños. Hoy quiero que por un momento dejes de hacer todo lo que haces por los demás y recibas, así sea solo un rato, algo hecho enteramente para ti.</p>
+      <p>Admiro cómo enfrentas cada día con una disciplina que pocas personas tienen: trabajas duro, te esfuerzas sin quejarte y sales adelante incluso cuando nadie más lo nota. Pero lo que más me enamora no es solo tu fortaleza, es tu manera de seguir siendo amable, cálida y generosa a pesar de todo lo que cargas.</p>
+      <p>Eres de esas personas que suman a la vida de quienes las rodean sin proponérselo. Con tu forma de escuchar, de cuidar los detalles, de estar presente. Yo soy uno de los que más se ha beneficiado de eso, y no dejo de sentirme afortunado.</p>
+      <p>Que este nuevo año te traiga menos cosas por cargar y más momentos para disfrutar lo que ya construiste. Que el trabajo te siga premiando, que la gente que quieres te siga cuidando como te lo mereces, y que yo pueda seguir aquí, celebrando cada uno de tus cumpleaños.</p>
+      <p class="firma">Con todo mi cariño, hoy y siempre.</p>
+    </div>
+  </section>
+
+  <section id="valores">
+    <span class="kicker">lo que más admiro de ti</span>
+    <h2>Algunas razones, entre muchas</h2>
+
+    <div class="valor">
+      <span class="marca">constancia</span>
+      <div class="txt">
+        <strong>Tu forma de trabajar</strong>
+        <span>Le pones el alma a todo lo que haces, incluso cuando nadie está mirando ni lo va a agradecer.</span>
+      </div>
+    </div>
+    <div class="valor">
+      <span class="marca">calidez</span>
+      <div class="txt">
+        <strong>Tu amabilidad</strong>
+        <span>Tienes ese don de hacer sentir bien a las personas sin esfuerzo, simplemente siendo tú.</span>
+      </div>
+    </div>
+    <div class="valor">
+      <span class="marca">entrega</span>
+      <div class="txt">
+        <strong>Tu manera de cuidar a los demás</strong>
+        <span>Piensas primero en las personas que quieres, y eso se nota en cada detalle que tienes con ellas.</span>
+      </div>
+    </div>
+    <div class="valor">
+      <span class="marca">carácter</span>
+      <div class="txt">
+        <strong>Tu fortaleza</strong>
+        <span>Sales adelante ante lo difícil sin perder tu esencia, y eso dice mucho de quién eres.</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="playlist">
+    <span class="kicker">para acompañar tu día</span>
+    <div class="media-card">
+      <h2>Tu playlist</h2>
+      <p class="desc">Una selección pensada para ti, para tenerla sonando de fondo mientras celebras.</p>
+      <div class="media-frame">
+        <iframe src="https://open.spotify.com/embed/playlist/3Vah0KkD1E54dBsbQwMozf?utm_source=generator" width="100%" height="380" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section id="cancion">
+    <span class="kicker">nuestra canción</span>
+    <div class="media-card">
+      <h2>Somos dos — Pablo Alborán</h2>
+      <p class="desc">Esta canción me recuerda a nosotros. Quería que estuviera aquí, en un lugar hecho para ti.</p>
+      <div class="media-frame">
+        <iframe width="100%" height="380" src="https://www.youtube.com/embed/Wu54-AIS5is" title="Somos dos - Pablo Alborán" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section id="velas">
+    <span class="kicker">un último deseo</span>
+    <h2 style="font-size:clamp(1.8rem,4vw,2.4rem);">Sopla las velitas</h2>
+    <p style="color:var(--lavender); max-width:40ch; margin:0.6rem auto 0;">Toca cada una para apagarla y pide un deseo por cada año que cumples.</p>
+    <div class="velas-row" id="velas-row"></div>
+    <div id="deseo-final">Que se cumplan todos tus deseos, mi amor. Feliz cumpleaños.</div>
+  </section>
+
+  <footer>
+    hecho con cariño para
+    <span class="fname">Angie Lorena</span>
+  </footer>
+
+</main>
+
+<script>
+  // Starfield
+  const starsWrap = document.getElementById('stars');
+  const starCount = window.innerWidth < 600 ? 40 : 80;
+  for(let i=0;i<starCount;i++){
+    const s = document.createElement('span');
+    s.style.top = Math.random()*100+'%';
+    s.style.left = Math.random()*100+'%';
+    s.style.animationDelay = (Math.random()*4)+'s';
+    s.style.animationDuration = (3+Math.random()*3)+'s';
+    starsWrap.appendChild(s);
+  }
+
+  // Intro sequence
+  const phrases = [
+    { text:'Hola' },
+    { html:'<span class="accent">Angie Lorena</span>' },
+    { text:'prepárate…' },
+    { text:'porque quiero desearte' },
+    { text:'un muy feliz' },
+    { html:'<span class="accent">cumpleaños</span>' },
+  ];
+  let idx = 0;
+  const introEl = document.getElementById('intro');
+  const phraseEl = document.getElementById('intro-phrase');
+  const dotsEl = document.getElementById('intro-dots');
+
+  phrases.forEach((_, i) => {
+    const d = document.createElement('span');
+    if(i===0) d.classList.add('active');
+    dotsEl.appendChild(d);
+  });
+
+  function renderPhrase(i){
+    const p = phrases[i];
+    phraseEl.classList.remove('show');
+    setTimeout(()=>{
+      phraseEl.innerHTML = p.html || p.text;
+      phraseEl.classList.add('show');
+      [...dotsEl.children].forEach((d,j)=>d.classList.toggle('active', j===i));
+    }, 320);
+  }
+
+  function advanceIntro(){
+    if(idx >= phrases.length - 1){
+      introEl.classList.add('fade-out');
+      document.body.classList.remove('lock');
+      setTimeout(()=> introEl.remove(), 1200);
+      return;
+    }
+    idx++;
+    renderPhrase(idx);
+  }
+
+  let autoTimer = setInterval(advanceIntro, 1900);
+  introEl.addEventListener('click', () => {
+    clearInterval(autoTimer);
+    advanceIntro();
+    autoTimer = setInterval(advanceIntro, 1900);
+  });
+
+  // Envelope
+  const envelope = document.getElementById('envelope');
+  const cartaTexto = document.getElementById('carta-texto');
+  envelope.addEventListener('click', () => {
+    const opening = !envelope.classList.contains('open');
+    envelope.classList.toggle('open');
+    if(opening){
+      setTimeout(()=> cartaTexto.classList.add('visible'), 500);
+    } else {
+      cartaTexto.classList.remove('visible');
+    }
+  });
+
+  // Velas
+  const velasRow = document.getElementById('velas-row');
+  const deseoFinal = document.getElementById('deseo-final');
+  const NUM_VELAS = 5;
+  let apagadas = 0;
+
+  function burst(x, y){
+    const colors = ['#e8b86d','#e3a6a0','#f6eedd'];
+    for(let i=0;i<10;i++){
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = 4 + Math.random()*4;
+      p.style.width = size+'px';
+      p.style.height = size+'px';
+      p.style.background = colors[Math.floor(Math.random()*colors.length)];
+      p.style.left = x+'px';
+      p.style.top = y+'px';
+      document.body.appendChild(p);
+      const angle = Math.random()*Math.PI*2;
+      const dist = 30 + Math.random()*40;
+      const dx = Math.cos(angle)*dist;
+      const dy = Math.sin(angle)*dist;
+      p.animate([
+        { transform:'translate(0,0)', opacity:1 },
+        { transform:`translate(${dx}px, ${dy}px)`, opacity:0 }
+      ], { duration:700, easing:'ease-out' });
+      setTimeout(()=> p.remove(), 720);
+    }
+  }
+
+  for(let i=0;i<NUM_VELAS;i++){
+    const btn = document.createElement('button');
+    btn.className = 'vela';
+    btn.setAttribute('aria-label', 'Apagar vela');
+    btn.innerHTML = '<div class="flame"></div><div class="stick"></div><div class="base"></div>';
+    btn.addEventListener('click', (e) => {
+      if(btn.classList.contains('off')) return;
+      btn.classList.add('off');
+      const rect = btn.getBoundingClientRect();
+      burst(rect.left + rect.width/2, rect.top + 10);
+      apagadas++;
+      if(apagadas === NUM_VELAS){
+        setTimeout(()=> deseoFinal.classList.add('show'), 400);
+      }
+    });
+    velasRow.appendChild(btn);
+  }
+</script>
+
+</body>
+</html>
